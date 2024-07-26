@@ -1,0 +1,14 @@
+section{
+    background-color: rgba(255, 255, 255, 0.43);
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+}
+
+.closeForm {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}

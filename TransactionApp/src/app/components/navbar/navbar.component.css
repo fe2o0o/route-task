@@ -1,0 +1,15 @@
+.userIcon{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.userData{
+  position: absolute;
+  width: 200px;
+  right: -50%;
+  background-color: white;
+  top: 120%;
+  display: none;
+}
+

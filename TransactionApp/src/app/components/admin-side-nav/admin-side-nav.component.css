@@ -1,0 +1,13 @@
+aside{
+  width: 250px;
+  background-color: #536493;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  color: #FFF1DB ;
+}
+
+.active{
+  background-color: #FFF1DB ;
+  color: #536493;
+}

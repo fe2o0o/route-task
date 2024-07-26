@@ -1,0 +1,35 @@
+<section class="form-overlay position-fixed top-0 bottom-0 start-0 end-0 ">
+  <div class="mt-5 p-4 rounded-4 position-relative  container d-flex justify-content-center align-items-center bg-body shadow-lg">
+      <mat-icon (click)="closeForm()" class="closeForm text-danger">cancel</mat-icon>
+    <div class="form w-100">
+      <h1 class="fs-4 fw-bold text-center">{{mood() == 'add' ? "Add" : "UpDate" }} Transaction</h1>
+      @if(globalError().length !=0){
+        <p class="text-danger fw-bold text-center">{{globalError()}}</p>
+      }
+      <form (ngSubmit)="handleTransaction(transactionForm)" [formGroup]="transactionForm" >
+        <div class="form-group mb-4" >
+          <label class="mb-2" for="">Amount</label>
+          <input (change)="globalError.set('')" formControlName="amount" type="number" class="form-control">
+          @if(transactionForm.get('amount')?.errors && transactionForm.get('amount')?.touched){
+            @if(transactionForm.get('amount')?.getError('required')){
+              <strong class="text-danger">Amount is Required</strong>
+            }
+            @if (transactionForm.get('amount')?.getError('min')) {
+              <strong class="text-danger">Minimun Amount is 100</strong>
+            }
+          }
+        </div>
+        <div class="form-group mb-4" >
+          <label class="mb-2" for="">Description</label>
+          <textarea (change)="globalError.set('')" formControlName="description" name="" class="form-control" id=""></textarea>
+          @if(transactionForm.get('description')?.errors && transactionForm.get('description')?.touched){
+            @if(transactionForm.get('description')?.getError('required')){
+            <strong class="text-danger">description is Required</strong>
+            }
+          }
+        </div>
+        <button [ngClass]="mood() == 'add' ? 'btn-success':'btn-warning'" [disabled]="transactionForm.invalid" class="btn  w-100" > Submit </button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<section class="py-4">
+  <div class="container">
+    <div class="userinfo border shadow p-4 rounded-4 ">
+      <h5>User Info</h5>
+      <div class="row g-4">
+        <div class="col-md-5">
+          <p>User Name : {{userData()?.name}}</p>
+        </div>
+        <div class="col-md-5">
+          <p>User Email : {{userData()?.email}}</p>
+        </div>
+        <div class="col-md-5">
+          <p>User Create Date : {{userData()?.createdAt|date:"dd-MM-YYY"}}</p>
+        </div>
+        <div class="col-md-5">
+          <p>Total Amount Transactions : {{userData()?.totalAmount|currency:"EGP "}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="userChart my-5 p-3">
+      <app-chart [TransactionData]="userData()?.transactions" ></app-chart>
+    </div>
+    <div class="tranDataTable">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element; let i =index"> {{i+1}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element?.amount|currency:"EGP "}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Created Date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.date |date:"dd-MM-YYY , h:mm a"}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> UpDated Date </th>
+            <td mat-cell *matCellDef="let element"> {{element?.createdAt == element?.updatedAt ? "No Updated": element?.updatedAt|date:"dd-MM-YYY , h:mm a"}} </td>
+          </ng-container>
+          <ng-container matColumnDef="desc">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element?.description}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </div>
+</section>

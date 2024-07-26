@@ -1,0 +1,38 @@
+<div class="form shadow-lg p-4 rounded-3">
+  <h1 class="fs-4 text-center fw-bolder">Welcome To Transaction APP</h1>
+  @if(globalError().length != 0){
+  <p class="text-center fw-bold text-danger">{{globalError()}}</p>
+  }
+  <form (ngSubmit)="handleLogin(loginForm)" [formGroup]="loginForm" >
+    <div class="form-group mb-4">
+      <label class="mb-1" for=""> Email</label>
+      <input (change)="globalError.set('')" formControlName="email" class="form-control" placeholder="Example@mail.com" type="email">
+        @if(loginForm.get('email')?.errors && loginForm.get('email')?.touched){
+        @if(loginForm.get('email')?.getError('required')){
+        <strong class="text-danger">Email Is Required</strong>
+        }@else if (loginForm.get('email')?.getError('email')) {
+        <strong class="text-danger">InValid Email</strong>
+        }
+        }
+    </div>
+    <div class="form-group mb-4">
+      <label class="mb-1" for="">Password</label>
+      <div class="position-relative">
+        <input (change)="globalError.set('')" formControlName="password" class="form-control"  placeholder="***********" [type]="inputType() ? 'text' : 'password'">
+        <a (click)="inputType.set(!inputType())" class=" px-3 position-absolute top-50 translate-middle-y end-0">
+          <img  width="25" [src]="inputType() ? 'assets/view.png':'assets/eye.png'" alt="">
+        </a>
+      </div>
+        @if(loginForm.get('password')?.errors && loginForm.get('password')?.touched){
+        @if(loginForm.get('password')?.getError('required')){
+        <strong class="text-danger">Password Is Required</strong>
+        }
+        }
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <button [disabled]="loginForm.invalid" class="btn btn-info fw-medium text-white">Login</button>
+      <p class="m-0 fw-medium">Don't Have Account ? <a class="fw-bold" routerLink="/register" >Register Now</a> </p>
+    </div>
+  </form>
+
+</div>

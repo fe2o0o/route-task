@@ -1,0 +1,9 @@
+<section class="position-fixed top-0 end-0 start-0 bottom-0">
+  <div class="container position-relative mt-5 p-4 rounded-4 bg-white shadow-lg">
+          <mat-icon (click)="closeForm()" class="closeForm text-danger">cancel</mat-icon>
+    <p class="fs-5 mb-4 fw-bolder">Transaction Amount : {{transaction()?.amount|currency:"EGP "}}</p>
+    <p class="fs-5 mb-4 fw-bold">Transaction Description : {{transaction()?.description}}</p>
+    <p class="fs-5 mb-4 fw-bold">Transaction Date : {{transaction()?.date|date:"dd-MM-YYYY h:mm a "}}</p>
+    <p class="fs-5 mb-4 fw-bold">Transaction Updated : {{transaction()?.updatedAt|date:"dd-MM-YYYY h:mm a"}}</p>
+  </div>
+</section>

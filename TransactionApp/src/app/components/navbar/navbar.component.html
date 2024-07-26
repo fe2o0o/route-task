@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand fw-bolder fs-4" href="#">Transaction APP</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item position-relative ">
+          <mat-icon (click)="toggleUserData()" class="fs-2 userIcon">account_circle</mat-icon>
+          <div class="userData shadow-lg rounded-3">
+            <ul class="list-unstyled">
+              <li class="p-2"> <p class="m-0">Welcome {{userData?.name}}</p> </li>
+              <hr class="my-1">
+              <li class="p-2">
+                <button (click)="logOut()" class="btn w-100 btn-danger"> LogOut</button>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,14 @@
+.form{
+    width:40%;
+    border: 2px solid #508C9B;
+}
+
+.form h1{
+  color: #134B70 ;
+}
+
+@media screen and (max-width:992px) {
+  .form{
+    width: 100%;
+  }
+}

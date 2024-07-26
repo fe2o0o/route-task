@@ -1,0 +1,46 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="No">
+      <th mat-header-cell *matHeaderCellDef> NO.  </th>
+      <td mat-cell *matCellDef="let element ; let i = index"> {{i+1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date  </th>
+      <td mat-cell *matCellDef="let element ;"> {{element.date|date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <td mat-cell *matCellDef="let element"> {{element.amount | currency:"EGP "}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="control">
+      <th mat-header-cell *matHeaderCellDef> Controls </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="d-flex justify-content-between">
+          <button (click)="updateTransaction(element)" class="btn p-1 d-flex justify-content-center align-items-center btn-warning"><mat-icon>autorenew</mat-icon></button>
+          <button (click)="deleteTransaction(element._id)" class="btn p-1 d-flex justify-content-center align-items-center btn-danger"><mat-icon>delete_forever</mat-icon></button>
+          <button (click)="ShowUserTransaction(element._id)" class="btn p-1 d-flex justify-content-center align-items-center btn-info text-white"><mat-icon>visibility</mat-icon></button>
+        </div>
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+<div class="py-5">
+  <h6>Total Amount  : {{totalAmount()|currency:" EGP " }}</h6>
+</div>
+
+<app-show-user-transaction (myEmitter)="closeShowTransaction()" [transactionId]="showTransactionId()" class="showTransactionOverlay" ></app-show-user-transaction>

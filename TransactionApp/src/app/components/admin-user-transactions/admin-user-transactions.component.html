@@ -1,0 +1,64 @@
+<section>
+  <div class="container">
+    <h1 class="fs-4 p-3 fw-bolder">All Transactions Data</h1>
+    <div class="filters mb-5">
+      <div class="row justify-content-evenly">
+        <div class="col-md-5">
+          <div class="inner">
+            <input (input)="applyFilter($event.target , 'name')" class="form-control" type="text" placeholder="Search By User Name">
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="inner">
+            <input (input)="applyFilter($event.target , 'totalAmount')" class="form-control" type="number" placeholder="Search By Amount">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="data ">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element ; let i =index"> {{i+1}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="TransactionsCount">
+            <th mat-header-cell *matHeaderCellDef> Transactions Count </th>
+            <td mat-cell *matCellDef="let element"> {{element?.transactions?.length}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="totalAmount">
+            <th mat-header-cell *matHeaderCellDef> Total Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element?.totalAmount | currency:"EGP "}} </td>
+          </ng-container>
+          <ng-container matColumnDef="show">
+            <th mat-header-cell *matHeaderCellDef> Show Transactions Details </th>
+            <td mat-cell *matCellDef="let element">
+              <button [routerLink]="['/admin/userDetails',element._id]" class="btn  p-1 d-flex justify-content-center align-items-center btn-info text-white"><mat-icon>visibility</mat-icon></button>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </div>
+</section>

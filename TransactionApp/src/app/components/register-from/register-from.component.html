@@ -1,0 +1,49 @@
+<div class="form shadow-lg p-4 rounded-3">
+  <h1 class="fs-4 text-center fw-bolder">Create Account Now</h1>
+    @if(globalError().length != 0){
+      <p class="text-center fw-bold text-danger">{{globalError()}}</p>
+    }
+  <form (ngSubmit)="handleRegister(registerForm)" [formGroup]="registerForm">
+    <div class="form-group mb-4">
+      <label class="mb-1" for=""> Name</label>
+      <input formControlName="name" class="form-control" placeholder="John Doe" type="email">
+      @if(registerForm.get('name')?.errors && registerForm.get('name')?.touched){
+        @if(registerForm.get('name')?.getError('required')){
+          <strong class="text-danger">Name Is Required</strong>
+        }@else if (registerForm.get('name')?.getError('minlength')) {
+          <strong class="text-danger">Name Must be More than 3 chracters</strong>
+        }
+      }
+    </div>
+    <div class="form-group mb-4">
+      <label class="mb-1" for=""> Email</label>
+      <input formControlName="email" class="form-control" placeholder="Example@mail.com" type="email">
+      @if(registerForm.get('email')?.errors && registerForm.get('email')?.touched){
+      @if(registerForm.get('email')?.getError('required')){
+      <strong class="text-danger">Email Is Required</strong>
+      }@else if (registerForm.get('email')?.getError('email')) {
+      <strong class="text-danger">InValid Email</strong>
+      }
+      }
+    </div>
+    <div class="form-group mb-4">
+      <label class="mb-1" for="">Password</label>
+      <div class="position-relative">
+        <input formControlName="password" class="form-control" placeholder="***********" [type]="inputType() ? 'text' : 'password'">
+        <a (click)="inputType.set(!inputType())" class=" px-3 position-absolute top-50 translate-middle-y end-0">
+          <img loading="lazy" width="25" [src]="inputType() ? 'assets/view.png':'assets/eye.png'" alt="">
+        </a>
+      </div>
+      @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched){
+        @if(registerForm.get('password')?.getError('required')){
+        <strong class="text-danger">Password Is Required</strong>
+        }
+      }
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <button [disabled]="registerForm.invalid" class="btn btn-primary fw-medium text-white">Register</button>
+      <p class="m-0 fw-medium">I Already Have Account !? <a class="fw-bold" routerLink="/login">Login Now</a> </p>
+    </div>
+  </form>
+
+</div>
